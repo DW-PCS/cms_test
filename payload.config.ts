@@ -6,14 +6,13 @@ import { pl } from '@payloadcms/translations/languages/pl';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
-import { Media, Promocje, Promocje_Page } from './collections/index';
-import { Test } from './collections/Testowa';
+import { Media, Promocje, Users, Wycieczki } from './collections/index';
 
 export default buildConfig({
   // editor: lexicalEditor(),
   editor: slateEditor({}),
 
-  collections: [Promocje_Page, Promocje, Media, Test],
+  collections: [Users, Media, Promocje, Wycieczki],
   i18n: {
     supportedLanguages: { en, pl } as any,
     fallbackLanguage: 'pl',
@@ -37,7 +36,7 @@ export default buildConfig({
 
   db: vercelPostgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI,
+      connectionString: process.env.DATABASE_URL,
     },
   }),
 
@@ -49,9 +48,6 @@ export default buildConfig({
   },
 
   admin: {
-    // livePreview: {
-    //   url: 'http://localhost:3000/promocje',
-    //   collections: ['promocje'],
-    // },
+    user: Users.slug,
   },
 });
