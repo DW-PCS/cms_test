@@ -1,4 +1,6 @@
-import { payload } from '@/config';
+import { getPromotionPage } from '@/lib/utils/getters/promotion-page';
+import { getPromotions } from '@/lib/utils/getters/promotions';
+import { getLocaleFromSearchParams } from '@/lib/utils/locales';
 import Link from 'next/link';
 
 const PromocjaCard = ({ promocja }: { promocja: any }) => {
@@ -46,28 +48,22 @@ const PromocjaCard = ({ promocja }: { promocja: any }) => {
   );
 };
 
-const Page = async () => {
-  const promocje = await payload.find({
-    collection: 'promocje',
-    where: {
-      _status: { equals: 'published' },
-    },
-  });
+interface PageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+const Page = async ({ searchParams }: PageProps) => {
+  const resolvedSearchParams = await searchParams;
+  const locale = getLocaleFromSearchParams(resolvedSearchParams);
 
-  if (!promocje.docs.length) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <p className="text-center text-gray-600">Brak dostępnych promocji</p>
-      </div>
-    );
-  }
+  const promocje = await getPromotions(locale);
+  const pageData = await getPromotionPage(locale);
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Aktualne Promocje</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">{pageData?.title}</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {promocje.docs.map(promocja => (
+        {promocje.map(promocja => (
           <PromocjaCard key={promocja.id} promocja={promocja} />
         ))}
       </div>

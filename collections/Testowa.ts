@@ -1,23 +1,22 @@
 import { revalidatePage } from '@/app/hooks/revalidatePage';
 import type { CollectionConfig } from 'payload';
 
-export const Promocje: CollectionConfig = {
-  slug: 'promocje',
-  labels: {
-    singular: {
-      en: 'Promotion',
-      pl: 'Promocja',
-    },
-    plural: {
-      en: 'Promotions',
-      pl: 'Promocje',
-    },
-  },
+export const Test: CollectionConfig = {
+  slug: 'test',
+
   fields: [
     {
       name: 'kierunek',
       type: 'text',
       localized: true,
+    },
+    {
+      name: 'test1',
+      type: 'checkbox',
+    },
+    {
+      name: 'test2',
+      type: 'code',
     },
     {
       name: 'title',
@@ -37,6 +36,26 @@ export const Promocje: CollectionConfig = {
       name: 'opis',
       type: 'richText',
       localized: true,
+    },
+    {
+      name: 'blocksFieldServerComponent',
+      type: 'blocks',
+      blocks: [
+        {
+          slug: 'text',
+          fields: [
+            {
+              name: 'content',
+              type: 'textarea',
+              label: 'Content',
+            },
+          ],
+          labels: {
+            plural: 'Text Blocks',
+            singular: 'Text Block',
+          },
+        },
+      ],
     },
   ],
   hooks: {

@@ -1,26 +1,19 @@
 import RichText from '@/components/features/RichText';
-import { payload } from '@/config';
+import { getPromotion, Promocja } from '@/lib/utils/getters/promotions';
+import { getLocaleFromSearchParams } from '@/lib/utils/locales';
 import { notFound } from 'next/navigation';
 interface PageProps {
   params: Promise<{
     id: string;
   }>;
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-interface Promocja {
-  id: string;
-  cena: number;
-  createdAt: string;
-  updatedAt: string;
-  kierunek: string;
-  krotki_opis: string;
-  opis: any;
-  title: string;
-}
-
-const PromotionPage = async ({ params }: PageProps) => {
+const PromotionPage = async ({ params, searchParams }: PageProps) => {
+  const resolvedSearchParams = await searchParams;
+  const locale = getLocaleFromSearchParams(resolvedSearchParams);
   const { id } = await params;
-  const promocja = await getPromotion(id);
+  const promocja = await getPromotion(id, locale);
 
   if (!promocja) {
     notFound();
@@ -37,26 +30,6 @@ const PromotionPage = async ({ params }: PageProps) => {
     </div>
   );
 };
-
-async function getPromotion(id: string): Promise<Promocja | null> {
-  try {
-    const result = await payload.find({
-      collection: 'promocje',
-      where: {
-        _status: { equals: 'published' },
-        id: {
-          equals: id,
-        },
-      },
-      limit: 1,
-    });
-
-    return (result.docs[0] as Promocja) || null;
-  } catch (error) {
-    console.error('Error fetching promotion:', error);
-    return null;
-  }
-}
 
 function PromotionHeader({ promocja }: { promocja: Promocja }) {
   return (
