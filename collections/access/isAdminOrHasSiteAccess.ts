@@ -7,9 +7,7 @@ export const isAdminOrHasSiteAccess =
 
     if (user.roles.includes('admin')) return true;
 
-    if (user.roles.includes('editor')) {
-      return true;
-    }
+    if (user.roles.includes('editor')) return true;
 
     return false;
   };

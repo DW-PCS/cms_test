@@ -1,5 +1,6 @@
-import Navigation from '@/components/Navigation';
+
 import { ArrowUp } from 'lucide-react';
+import Navigation from '../components/Navigation';
 
 export default function Home() {
   return (

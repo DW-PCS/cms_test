@@ -1,3 +1,4 @@
+import { revalidatePage } from '@/app/hooks/revalidatePage';
 import type { CollectionConfig } from 'payload';
 import { isAdmin } from './access/admins';
 import { isAdminOrHasSiteAccess } from './access/isAdminOrHasSiteAccess';
@@ -69,4 +70,7 @@ export const Promocje: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [revalidatePage],
+  },
 };
