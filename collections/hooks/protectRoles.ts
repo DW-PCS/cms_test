@@ -1,5 +1,4 @@
-import { User } from '@/app/(payload)/payload-types';
-import type { FieldHook } from 'payload';
+import type { FieldHook, User } from 'payload';
 
 export const protectRoles: FieldHook<{ id: string } & User> = ({ data, req }) => {
   if (!req.user || !req.user.roles || !data) {
