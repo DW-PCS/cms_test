@@ -77,7 +77,7 @@ const WycieczkaPage = async ({ params }: PageProps) => {
             <div className="border-t border-gray-100 px-6 py-8 sm:px-8 sm:py-10">
               <h2 className="mb-6 text-2xl font-bold text-gray-900">Program wycieczki</h2>
               <div className="space-y-6">
-                {wycieczka.schedule.map(day => (
+                {wycieczka.schedule.map((day: any) => (
                   <div key={day.id} className="rounded-lg border border-gray-200 p-4">
                     <h3 className="mb-3 font-semibold text-gray-900">Dzień {day.day}</h3>
                     <RichText content={day.activities} />
@@ -91,7 +91,7 @@ const WycieczkaPage = async ({ params }: PageProps) => {
             <div className="border-t border-gray-100 px-6 py-8 sm:px-8 sm:py-10">
               <h2 className="mb-4 text-2xl font-bold text-gray-900">Usługi w cenie</h2>
               <ul className="space-y-2">
-                {wycieczka.services.map(service => (
+                {wycieczka.services.map((service: any) => (
                   <li key={service.id} className="flex items-start gap-2">
                     <span className="text-green-600">✓</span>
                     <span className="text-gray-700">{service.service}</span>
