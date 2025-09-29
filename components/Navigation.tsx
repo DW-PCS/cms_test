@@ -10,6 +10,7 @@ import { NavigationMenu, NavigationMenuItem } from '@/components/ui/navigation-m
 import { Globe } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import Logo from './icons/logo';
 
 const LOCALES = [
@@ -19,7 +20,7 @@ const LOCALES = [
 
 type LocaleCode = (typeof LOCALES)[number]['code'];
 
-const Navigation = () => {
+const LocaleSelector = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -32,6 +33,28 @@ const Navigation = () => {
     router.push(`${pathname}?${params.toString()}`);
   };
 
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-blue-50 transition-colors text-gray-700 font-medium outline-none">
+        <Globe className="w-4 h-4" />
+        <span className="uppercase">{currentLocale}</span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="bg-white">
+        {LOCALES.map(locale => (
+          <DropdownMenuItem
+            key={locale.code}
+            onClick={() => handleLocaleChange(locale.code)}
+            className={currentLocale === locale.code ? 'bg-blue-50' : ''}
+          >
+            {locale.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+const Navigation = () => {
   return (
     <div className="flex items-center justify-between mb-4 bg-white shadow-sm border-b">
       <div className="flex items-center">
@@ -56,26 +79,19 @@ const Navigation = () => {
       </div>
 
       <div className="p-4 bg-white">
-        <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-blue-50 transition-colors text-gray-700 font-medium outline-none">
-            <Globe className="w-4 h-4" />
-            <span className="uppercase">{currentLocale}</span>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-white">
-            {LOCALES.map(locale => (
-              <DropdownMenuItem
-                key={locale.code}
-                onClick={() => handleLocaleChange(locale.code)}
-                className={currentLocale === locale.code ? 'bg-blue-50' : ''}
-              >
-                {locale.label}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Suspense fallback={<LocaleFallback />}>
+          <LocaleSelector />
+        </Suspense>
       </div>
     </div>
   );
 };
+
+const LocaleFallback = () => (
+  <div className="flex items-center gap-2 px-3 py-2 text-gray-700 font-medium">
+    <Globe className="w-4 h-4" />
+    <span className="uppercase">pl</span>
+  </div>
+);
 
 export default Navigation;
