@@ -26,15 +26,15 @@ const PromocjePage = async ({ searchParams }: PageProps) => {
         >
           <div>
             <Image
-              src={promocja.image.url}
+              src={promocja?.image?.url}
               width={470}
               height={300}
-              alt={promocja.alt || promocja.title || 'Promocja'}
+              alt={promocja?.alt || promocja?.title || 'Promocja'}
               unoptimized
             />
-            <p className="pt-2 font-bold">{promocja.title}</p>
-            <p className="pt-2">{promocja.shortDescription}</p>
-            <p className="pt-2 font-bold">{promocja.price} zł</p>
+            <p className="pt-2 font-bold">{promocja?.title}</p>
+            <p className="pt-2">{promocja?.shortDescription}</p>
+            <p className="pt-2 font-bold">{promocja?.price} zł</p>
           </div>
         </Link>
       ))}

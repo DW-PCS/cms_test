@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: 'PolFerries',
   description: 'Promy do Szwecji i Danii, turystyka w Skandynawii i Cargo',
 };
+export const revalidate = 30;
 
 export default function RootLayout({
   children,

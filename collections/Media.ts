@@ -2,8 +2,11 @@ import type { CollectionConfig } from 'payload';
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  access: {
+    read: () => true,
+  },
   upload: {
-    staticDir: 'media',
+    disableLocalStorage: true,
     imageSizes: [
       {
         name: 'thumbnail',
@@ -20,7 +23,6 @@ export const Media: CollectionConfig = {
       {
         name: 'tablet',
         width: 1024,
-
         height: undefined,
         position: 'centre',
       },
@@ -32,6 +34,7 @@ export const Media: CollectionConfig = {
     {
       name: 'alt',
       type: 'text',
+      required: true,
     },
   ],
 };

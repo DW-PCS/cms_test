@@ -1,8 +1,8 @@
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres';
 import { slateEditor } from '@payloadcms/richtext-slate';
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { en } from '@payloadcms/translations/languages/en';
 import { pl } from '@payloadcms/translations/languages/pl';
-
 import path from 'path';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
@@ -15,7 +15,19 @@ import { Wycieczki } from './collections/Wycieczki';
 export default buildConfig({
   editor: slateEditor({}),
   collections: [Users, Media, Promocje, Wycieczki],
+  plugins: [
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        media: true,
+        'media-with-prefix': {
+          prefix: 'my-prefix',
+        },
+      },
 
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    }),
+  ],
   i18n: {
     //@ts-ignore
     supportedLanguages: { en, pl },

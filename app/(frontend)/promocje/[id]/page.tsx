@@ -27,7 +27,7 @@ const PromocjaPage = async ({ params, searchParams }: PageProps) => {
         <article className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
           <div className="relative h-64">
             <Image
-              src={promocja.image.url}
+              src={promocja.image?.url}
               alt={promocja.alt || promocja.title || 'Promocja'}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 896px, 896px"
