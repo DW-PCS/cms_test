@@ -6,13 +6,19 @@ interface PageProps {
   params: Promise<{
     id: string;
   }>;
+  searchParams: Promise<{
+    locale?: string;
+  }>;
 }
 
-const PromocjaPage = async ({ params }: PageProps) => {
+const PromocjaPage = async ({ params, searchParams }: PageProps) => {
   const { id } = await params;
+  const { locale = 'pl' } = await searchParams;
+
   const promocja = await payload.findByID({
     collection: 'promocje',
     id,
+    locale,
   });
 
   return (
@@ -22,7 +28,7 @@ const PromocjaPage = async ({ params }: PageProps) => {
           <div className="relative h-64">
             <Image
               src={promocja.image.url}
-              alt={promocja.alt}
+              alt={promocja.alt || promocja.title || 'Promocja'}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 896px, 896px"
               unoptimized

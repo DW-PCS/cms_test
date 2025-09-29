@@ -14,7 +14,7 @@
     "@payloadcms/richtext-lexical": "^3.56.0",
     "@payloadcms/richtext-slate": "^3.56.0",
     "@payloadcms/translations": "^3.57.0",
-    "@payloadcms/ui": "^3.57.0",
+    "@payloadcms/ui": "^3.56.0",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-navigation-menu": "^1.2.14",
     "class-variance-authority": "^0.7.1",
