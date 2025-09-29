@@ -4,8 +4,14 @@ import { isAdmin } from './access/admins';
 export const Wycieczki: CollectionConfig = {
   slug: 'wycieczki',
   labels: {
-    singular: 'Wycieczka',
-    plural: 'Wycieczki',
+    singular: {
+      en: 'Trip',
+      pl: 'Wycieczka',
+    },
+    plural: {
+      en: 'Trips',
+      pl: 'Wycieczki',
+    },
   },
   access: {
     create: isAdmin,

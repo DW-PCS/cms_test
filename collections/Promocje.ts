@@ -6,8 +6,11 @@ import { isAdminOrHasSiteAccess } from './access/isAdminOrHasSiteAccess';
 export const Promocje: CollectionConfig = {
   slug: 'promocje',
   labels: {
-    singular: 'Promocja',
-    plural: 'Promocje',
+    singular: { en: 'Promotion', pl: 'Promocja' },
+    plural: {
+      en: 'Promotions',
+      pl: 'Promocje',
+    },
   },
   access: {
     create: isAdminOrHasSiteAccess(),
