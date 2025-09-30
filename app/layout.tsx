@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+
+import Navigation from '@/components/Navigation';
+import { payload } from '@/config';
 import './globals.css';
 
 const geistSans = Geist({
@@ -18,14 +21,18 @@ export const metadata: Metadata = {
 };
 export const revalidate = 30;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const navigation = await payload.find({ collection: 'navigation' });
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Navigation navigation={navigation} />
+        {children}
+      </body>
     </html>
   );
 }

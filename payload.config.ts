@@ -8,13 +8,14 @@ import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
 import { Media } from './collections/Media';
-import { Promocje } from './collections/Promocje';
+import { Navigation } from './collections/Navigation';
 import { Users } from './collections/Users';
-import { Wycieczki } from './collections/Wycieczki';
+import { MainPage } from './globals/MainPage';
 
 export default buildConfig({
   editor: slateEditor({}),
-  collections: [Users, Media, Promocje, Wycieczki],
+  globals: [MainPage],
+  collections: [Users, Media, Navigation],
   plugins: [
     vercelBlobStorage({
       enabled: true,
