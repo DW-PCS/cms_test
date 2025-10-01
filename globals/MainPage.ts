@@ -6,7 +6,7 @@ export const MainPage: GlobalConfig = {
 
   label: {
     en: 'Main Page',
-    pl: 'Strona główna',
+    pl: 'Strona główna a',
   },
   access: {
     read: isAdminOrHasAccess(),
