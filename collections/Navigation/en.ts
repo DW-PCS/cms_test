@@ -1,18 +1,16 @@
 import type { CollectionConfig } from 'payload';
-import { isAdminOrHasAccess } from './access/isAdminOrHasAccess';
+import { isAdminOrHasAccess } from '../access/isAdminOrHasAccess';
 
 
-export const Navigation: CollectionConfig = {
-  slug: 'navigation',
+export const NavigationEN: CollectionConfig = {
+  slug: 'navigation_en',
 
   labels: {
     singular: {
-      en: 'Navigation Item',
-      pl: 'Element Nawigacji',
+      en: 'Navigation EN',
     },
     plural: {
-      en: 'Navigation',
-      pl: 'Nawigacja',
+      en: 'Navigation EN',
     },
   },
 

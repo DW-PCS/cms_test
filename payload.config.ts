@@ -8,14 +8,15 @@ import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
 import { Media } from './collections/Media';
-import { Navigation } from './collections/Navigation';
+
+import { NavigationEN, NavigationPL } from './collections/Navigation';
 import { Users } from './collections/Users';
 import { MainPage } from './globals/MainPage';
 
 export default buildConfig({
   editor: slateEditor({}),
   globals: [MainPage],
-  collections: [Users, Media, Navigation],
+  collections: [Users, Media, NavigationPL, NavigationEN],
   plugins: [
     vercelBlobStorage({
       enabled: true,

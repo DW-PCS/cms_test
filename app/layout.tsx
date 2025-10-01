@@ -26,7 +26,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const navigation = await payload.find({ collection: 'navigation' });
+
+  const navigation = await payload.find({ collection: 'navigation_pl' });
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
